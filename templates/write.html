@@ -10,6 +10,7 @@
 		{{ formhelpers.render_field(form.anonymous) }}
 		{{ formhelpers.render_buttons('Create') }}
 	</form>
+	{% if stories %}
 	<h2>...or continue one of your unfinished ones.</h2>
 	<table class="table table-blocklinks table-blend">
 		{% for story in stories %}
@@ -18,4 +19,5 @@
 		</tr>
 		{% endfor %}
 	</table>
+	{% endif %}
 {% endblock %}
