@@ -1,0 +1,48 @@
+{% macro render_fields(fields, helptext='', label=none, no_label=False) %}
+	<div class="form-group {% if fields[0].errors %}has-error{% endif %}">
+		{% if fields[0].type == 'SelectField' %}{{ fields[0].label }}{% endif %}
+		{%- for field in fields -%}
+			{% with placeholder, kwargs_ = kwargs|extract('placeholder', field.label.text) %}
+				{{ field(class_='form-control', placeholder=placeholder, **kwargs_) }}
+			{% endwith -%}
+		{%- endfor %}
+		{%- if helptext %}
+			<span class="help-block">{{ helptext|safe }}</span>
+		{%- endif %}
+	</div>
+{% endmacro %}
+{% macro render_field(field, helptext='', label=none) %}
+	{% if field.type == 'BooleanField' -%}
+		<div class="checkbox">
+			<label>
+				{{ field }}
+				{{ field.label.text }}
+			</label>
+		</div>
+	{% elif field.type == 'RadioField' -%}
+		{% for subfield in field -%}
+			<div class="radio">
+				<label>
+					{{ subfield }}
+					{{ subfield.label.text }}
+				</label>
+			</div>
+		{% endfor -%}
+	{% else -%}
+		{{ render_fields([field], helptext, label, **kwargs) }}
+	{% endif -%}
+{% endmacro %}
+
+{# Renders a line of Buttons #}
+{# 'submit' is the title of the Submit button, or None to exclude it #}
+{# 'extrabuttons' is a list in the form [(title, url, class), ...] of extra buttons #}
+{% macro render_buttons(submit="Submit", extrabuttons=[]) %}
+	<div class="form-group">
+		{% if submit -%}
+			<input type="submit" class="btn btn-primary" value="{{ submit }}" />
+		{% endif %}
+		{% for button in extrabuttons -%}
+			<a class="{{ button[2] if button|length >= 3 else "btn btn-default" }}" href="{{ button[1] }}">{{ button[0] }}</a>
+		{% endfor %}
+	</div>
+{% endmacro %}

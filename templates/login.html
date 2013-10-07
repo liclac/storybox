@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "_formhelpers.html" as formhelpers %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading with-right-link">
+			<h3 class="panel-title">Log in</h3>
+			<a class="right-link" href="{{ url_for('register') }}">Register</a>
+		</div>
+		<form class="form-horizontal panel-body" action="." method="POST">
+			{{ form.csrf_token }}
+			{{ formhelpers.render_field(form.username, autofocus=True) }}
+			{{ formhelpers.render_field(form.password) }}
+			{{ formhelpers.render_buttons("Log in") }}
+		</div>
+	</div>
+{% endblock %}

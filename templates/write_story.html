@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% import "_formhelpers.html" as formhelpers %}
+{% block title %}Write{% endblock %}
+{% block content %}
+	<form class="form-blend" action="." method="POST">
+		<h1 class="distraction">
+			<small>{{ story.title }}&nbsp;&gt;</small>
+			<span class="block">New Page</span>
+		</h1>
+		
+		{{ form.csrf_token }}
+		{{ form.story }}
+		
+		<div class="toolbar distraction">
+			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '*', { '***': '**', '**': '***', '*': '' })"><em>i</em></a>
+			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '**', { '***': '*', '**': '', '*': '***' })"><strong>b</strong></a>
+		</div>
+		{{ formhelpers.render_field(form.text, is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...") }}
+		
+		<div class="distraction">
+			<p class="helptext helptext-tiny distraction-disappear" id="resize-tip">
+				Tip: The textarea will resize automatically as you type~
+			</p>
+			
+			<a class="detail-disclosure" href="#advanced" data-toggle="collapse">&mdash;&nbsp;Advanced&nbsp;&mdash;</a>
+			<div id="advanced" class="collapse">
+				{{ formhelpers.render_field(form.prev_page, disabled=(story.pages.length == 0)) }}
+				<p class="helptext">
+					You can make branching stories by setting multiple pages to follow a single one.<br />
+					Branching stories get a different URL scheme, using gibberish page identifiers rather than sequential page numbers.
+					<a href="{{ url_for('help', topic='branching') }}" target="_blank">(read more)</a>
+				</p>
+			</div>
+			{{ formhelpers.render_buttons("Publish") }}
+		</div>
+	</form>
+{% endblock %}
+{% block after_js %}
+	<script type="text/javascript">
+		$('#text')
+			// Make it resize automatically as the content grows.
+			.autosize()
+			
+			// Make distractions disappear while you're typing, and
+			// reappear when they're not.
+			.keyup(hideDistractionsIfEventTargetIsNotEmpty)
+			.focus(hideDistractionsIfEventTargetIsNotEmpty)
+			.blur(function() { setDistractions(true) }).
+			focus()
+	</script>
+{% endblock %}

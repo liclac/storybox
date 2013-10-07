@@ -1,0 +1,12 @@
+{% extends "user.html" %}
+{% block title %}{{ user.profile.name }}'s Profile{% endblock %}
+{% block header %}
+	<h1>
+		{{ user.profile.name }}
+		<small>{{ user.username }}</small>
+		<div class="toolbox">
+			<a class="btn btn-block btn-default" href="{{ url_for('me_edit') }}">Edit</a>
+			<a class="btn btn-block btn-default" href="{{ url_for('user', username=user.username) }}">Permalink</a>
+		</div>
+	</h1>
+{% endblock %}

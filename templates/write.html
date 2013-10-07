@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "_formhelpers.html" as formhelpers %}
+{% block title %}Write{% endblock %}
+{% block content %}
+	<h1>Create a new story...</h1>
+	<form class="form-blend" action="." method="POST">
+		{{ form.csrf_token }}
+		{{ formhelpers.render_field(form.title, autofocus=True) }}
+		{{ formhelpers.render_field(form.description, rows=5) }}
+		{{ formhelpers.render_field(form.anonymous) }}
+		{{ formhelpers.render_buttons('Create') }}
+	</form>
+	<h2>...or continue one of your unfinished ones.</h2>
+	<table class="table table-blocklinks table-blend">
+		{% for story in stories %}
+		<tr>
+			<td><a href="{{ url_for('write_story', identifier=story.identifier) }}">{{ story.title }}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+.webassets-cache
+static/gen/*
+
+db.sqlite
+keys.py
+

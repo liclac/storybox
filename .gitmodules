@@ -1,0 +1,9 @@
+[submodule "static/lib/bootstrap"]
+	path = static/lib/bootstrap
+	url = https://github.com/twbs/bootstrap.git
+[submodule "static/lib/jquery-autosize"]
+	path = static/lib/jquery-autosize
+	url = https://github.com/jackmoore/autosize.git
+[submodule "static/lib/jquery-selection"]
+	path = static/lib/jquery-selection
+	url = https://github.com/madapaja/jquery.selection.git

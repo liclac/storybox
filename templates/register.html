@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "_formhelpers.html" as formhelpers %}
+{% block title %}Register{% endblock %}
+{% block content %}
+	<div class="panel panel-default panel-centered">
+		<div class="panel-heading">
+			<h3 class="panel-title">Register</h3>
+		</div>
+		<form class="form-horizontal panel-body" action="." method="POST">
+			{{ form.csrf_token }}
+			{{ formhelpers.render_field(form.name, "This will be shown on your profile and your non-anomymous stories.", autofocus=true) }}
+			{{ formhelpers.render_field(form.username, "This is used to log in and for messaging and such.") }}
+			{{ formhelpers.render_fields([form.password, form.password_confirm], "Type it twice to be sure you didn't misspell it the first time!") }}
+			{{ formhelpers.render_buttons("Register") }}
+		</form>
+	</div>
+{% endblock %}
