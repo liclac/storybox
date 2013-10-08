@@ -23,17 +23,20 @@ login_manager.login_message_category = 'error'
 
 # Note that we're not using URL prefixes - some blueprints need to react to
 # multiple different URLs (such as the user one, which has both /u and /me)
-from modules.help.help import mod as help_mod
-app.register_blueprint(help_mod)
-
 from modules.login.login import mod as login_mod
 app.register_blueprint(login_mod)
+
+from modules.users.users import mod as users_mod
+app.register_blueprint(users_mod)
+
+from modules.stories.stories import mod as stories_mod
+app.register_blueprint(stories_mod)
 
 from modules.write.write import mod as write_mod
 app.register_blueprint(write_mod)
 
-from modules.users.users import mod as users_mod
-app.register_blueprint(users_mod)
+from modules.help.help import mod as help_mod
+app.register_blueprint(help_mod)
 
 
 
@@ -69,14 +72,6 @@ def index():
 @app.route('/about/')
 def about():
 	return render_template('about.html')
-
-@app.route('/s/')
-def stories():
-	return render_template('stories.html')
-
-@app.route('/s/<identifier>')
-def story(identifier):
-	return render_template('story.html')
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
