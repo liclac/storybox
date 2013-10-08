@@ -164,6 +164,14 @@ small {
 			}
 		}
 	}
+	
+	// Bootstrap tries to be helpful. It's amazingly unsuccessful.
+	.navbar-collapse {
+		padding: 0;
+		
+		.navbar-nav.navbar-left:first-child { margin-left: 0; }
+		.navbar-nav.navbar-right:last-child { margin-right: 0; }
+	}
 }
 
 .container {
