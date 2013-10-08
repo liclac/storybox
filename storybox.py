@@ -29,6 +29,9 @@ app.register_blueprint(help_mod)
 from modules.login.login import mod as login_mod
 app.register_blueprint(login_mod)
 
+from modules.write.write import mod as write_mod
+app.register_blueprint(write_mod)
+
 
 
 @login_manager.user_loader
@@ -108,27 +111,6 @@ def me_edit_login():
 			db.session.commit()
 			return redirect('me')
 	return render_template('me_edit_login.html', user=current_user, form=form)
-
-@app.route('/w/', methods=['GET', 'POST'])
-@login_required
-def write():
-	form = NewStoryForm()
-	stories = Story.query.all()
-	if form.validate_on_submit():
-		story = Story(current_user, form.title.data, form.description.data, form.anonymous.data)
-		db.session.add(story)
-		db.session.commit()
-		return redirect(url_for('write_story', identifier=story.identifier))
-	return render_template('write.html', form=form, stories=stories)
-
-@app.route('/w/<identifier>/', methods=['GET', 'POST'])
-@login_required
-def write_story(identifier):
-	story = Story.query.filter_by(identifier=identifier).first()
-	form = WriteForm()
-	form.prev_page.choices = [(page.id, page.title) for page in story.pages]
-	form.prev_page.default = len(form.prev_page.choices)
-	return render_template('write_story.html', story=story, form=form)
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')

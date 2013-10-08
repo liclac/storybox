@@ -15,7 +15,7 @@
 	<table class="table table-blocklinks table-blend">
 		{% for story in stories %}
 		<tr>
-			<td><a href="{{ url_for('write_story', identifier=story.identifier) }}">{{ story.title }}</a></td>
+			<td><a href="{{ url_for('write.story', identifier=story.identifier) }}">{{ story.title }}</a></td>
 		</tr>
 		{% endfor %}
 	</table>
