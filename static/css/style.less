@@ -13,6 +13,85 @@ h1, h2, h3 {
 	margin-bottom: 20px;
 }
 
+small {
+	font-size: 10px;
+	color: #666;
+}
+
+
+
+/*
+ * -- Helper Classes
+ */
+
+.align-right {
+	text-align: right !important;
+}
+
+.block {
+	display: block !important;
+}
+
+
+
+/*
+ * -- Bootstrap Default Overrides
+ */
+
+.form-group {
+	.form-control {
+		margin-bottom:5px;
+		&:last-child { margin-bottom:0; }
+	}
+	.checkbox label {
+		display: block;
+	}
+}
+
+.alert {
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.panel {
+	border: none;
+	
+	.panel-heading {
+		background: none;
+		padding-left: 0;
+		
+		.panel-title {
+			font-size: 24pt;
+		}
+		
+		&.with-right-link {
+			.clearfix();
+			
+			>* {
+				@media(min-width: @screen-xs-min) {
+					float: left;
+				}
+			}
+			
+			a.right-link {
+				display: block;
+				padding: 5px 0;
+				
+				@media(min-width: @screen-xs-min) {
+					float: right;
+					padding: 0;
+				}
+			}
+		}
+	}
+}
+
+
+
+/*
+ * -- Overrides for specific parts of the site
+ */
+
 .navbar {
 	background:none;
 	border:none;
@@ -88,87 +167,18 @@ h1, h2, h3 {
 	}
 }
 
-.panel {
-	border: none;
-	
-	.panel-heading {
-		background: none;
-		padding-left: 0;
-		
-		.panel-title {
-			font-size: 24pt;
-		}
-		
-		&.with-right-link {
-			.clearfix();
-			
-			>* {
-				@media(min-width: @screen-xs-min) {
-					float: left;
-				}
-			}
-			
-			a.right-link {
-				display: block;
-				padding: 5px 0;
-				
-				@media(min-width: @screen-xs-min) {
-					float: right;
-					padding: 0;
-				}
-			}
-		}
+dl.faq {
+	dd {
+		margin-bottom: 20px;
+		&:last-child { margin-bottom: 0; }
 	}
 }
 
-.nav-tabs {
-	margin-bottom: 10px;
-}
 
-.form-group {
-	.form-control {
-		margin-bottom:5px;
-		&:last-child { margin-bottom:0; }
-	}
-	.checkbox label {
-		display: block;
-	}
-}
 
-.alert {
-	padding-top:10px;
-	padding-bottom:10px;
-}
-
-.align-right {
-	text-align: right;
-}
-
-.block {
-	display: block !important;
-}
-
-.toolbox {
-	margin-top: 10px;
-	width: 100%;
-	
-	@media(min-width: @screen-sm) {
-		.pull-right();
-		width: 100px;
-	}
-}
-
-.table-blocklinks {
-	td {
-		padding: 0 !important;
-		
-		a {
-			padding: 8px;
-			display: block;
-		}
-	}
-}
-
+/*
+ * -- Components
+ */
 .helptext {
 	color: #777;
 	line-height: 1.5em;
@@ -201,6 +211,16 @@ h1, h2, h3 {
 				opacity: 0.75;
 			}
 		}
+	}
+}
+
+.toolbox {
+	margin-top: 10px;
+	width: 100%;
+	
+	@media(min-width: @screen-sm) {
+		.pull-right();
+		width: 100px;
 	}
 }
 
@@ -259,6 +279,17 @@ h1, h2, h3 {
 			color: #777;
 			background-color: #eee;
 			text-decoration: none;
+		}
+	}
+}
+
+.table-blocklinks {
+	td {
+		padding: 0 !important;
+		
+		a {
+			padding: 8px;
+			display: block;
 		}
 	}
 }

@@ -56,12 +56,14 @@
 		{% endblock %}
 		<!-- /Content -->
 		
+		<!-- Footer -->
 		<footer id="footer" class="distraction">
 			<ul class="nav nav-pills">
-				<li><a href="#">About</a></li>
-				<li><a href="#">Help</a></li>
+				<li><a href="{{ url_for('about') }}">About</a></li>
+				<li><a href="{{ url_for('help.index') }}">Help</a></li>
 			</ul>
 		</footer>
+		<!-- /Footer -->
 	</div>
 	
 	{% assets "js_all" %}

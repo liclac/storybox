@@ -24,6 +24,10 @@ login_manager.login_message_category = 'error'
 from modules.help.help import mod as help_mod
 app.register_blueprint(help_mod)
 
+@login_manager.user_loader
+def load_user(userid):
+	return User.query.get(userid)
+
 @app.template_filter()
 def extract(d, key, default=None):
 	if not key in d:
@@ -32,10 +36,6 @@ def extract(d, key, default=None):
 		val = d[key]
 		del d[key]
 		return (val, d)
-
-@login_manager.user_loader
-def load_user(userid):
-	return User.query.get(userid)
 
 @app.context_processor
 def context_processor():
@@ -53,10 +53,9 @@ def context_processor():
 def index():
 	return render_template('index.html')
 
-@app.route('/dashboard/')
-@login_required
-def dashboard():
-	return render_template('dashboard.html')
+@app.route('/about/')
+def about():
+	return render_template('about.html')
 
 @app.route('/s/')
 def stories():
@@ -155,4 +154,3 @@ def register():
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
-
