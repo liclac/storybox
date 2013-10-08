@@ -15,13 +15,9 @@
 			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '*', { '***': '**', '**': '***', '*': '' })"><em>i</em></a>
 			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '**', { '***': '*', '**': '', '*': '***' })"><strong>b</strong></a>
 		</div>
-		{{ formhelpers.render_field(form.text, is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...") }}
+		{{ formhelpers.render_field(form.text, is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...   (The textarea will resize as you type)") }}
 		
 		<div class="distraction">
-			<p class="helptext helptext-tiny distraction-disappear" id="resize-tip">
-				Tip: The textarea will resize automatically as you type~
-			</p>
-			
 			<a class="detail-disclosure" href="#advanced" data-toggle="collapse">&mdash;&nbsp;Advanced&nbsp;&mdash;</a>
 			<div id="advanced" class="collapse">
 				{{ formhelpers.render_field(form.prev_page, disabled=(story.pages.length == 0)) }}
