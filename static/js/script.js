@@ -33,3 +33,7 @@ function wrapSelection(element, wrap, replmap) {
 		$(element).selection('setPos', {start: pos.start + 1, end: pos.start + 1})
 	}
 }
+
+$(document).ready(function() {
+	$('.textarea-autosize').autosize()
+})

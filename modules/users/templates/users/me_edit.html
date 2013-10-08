@@ -7,10 +7,10 @@
 			<h3 class="panel-title">Edit Profile</h3>
 			<a class="right-link" href="{{ url_for('users.me_edit_login') }}">Change Username or Password</a>
 		</div>
-		<form class="form-horizontal panel-body" action="." method="POST">
+		<form class="form-horizontal form-blend panel-body" action="." method="POST">
 			{{ form.csrf_token }}
 			{{ formhelpers.render_field(form.name, "This will be shown on your profile and your non-anomymous stories.", autofocus=true) }}
-			{{ formhelpers.render_field(form.bio, "<a href='" + url_for('help.topic', topic='markdown') + "'>Markdown</a> is allowed", rows=20) }}
+			{{ formhelpers.render_field(form.bio, "<a href='" + url_for('help.topic', topic='markdown') + "'>Markdown</a> is allowed", class="form-control textarea-autosize", rows=10) }}
 			{{ formhelpers.render_buttons("Save", [("Cancel", url_for('users.me'))]) }}
 		</form>
 	</div>

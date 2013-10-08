@@ -2,6 +2,6 @@
 {% block title %}{{ story.title }}{% endblock %}
 {% block content %}
 	<h1>{{ story.title }}</h1>
-	{{ story.description|markdown }}
+	{{ page.text|markdown }}
 {% endblock %}
 

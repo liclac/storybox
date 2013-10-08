@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Stories{% endblock %}
 {% block content %}
-	<p>Insert list of stories here</p>
+	<h1>Stories</h1>
+	<table class="table table-blocklinks table-blend">
+		{% for story in stories -%}
+		<tr>
+			<td>
+				<a href="{{ url_for('stories.story', identifier=story.identifier) }}">{{ story.title }}</a>
+			</td>
+		</tr>
+		{% endfor -%}
+	</table>
 {% endblock %}
 

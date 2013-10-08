@@ -7,7 +7,7 @@
 			<h3 class="panel-title">Log in</h3>
 			<a class="right-link" href="{{ url_for('login.register') }}">Register</a>
 		</div>
-		<form class="form-horizontal panel-body" action="." method="POST">
+		<form class="form-horizontal form-blend panel-body" action="." method="POST">
 			{{ form.csrf_token }}
 			{{ formhelpers.render_field(form.username, autofocus=True) }}
 			{{ formhelpers.render_field(form.password) }}

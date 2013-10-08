@@ -6,7 +6,7 @@
 	<form class="form-blend" action="." method="POST">
 		{{ form.csrf_token }}
 		{{ formhelpers.render_field(form.title, autofocus=True) }}
-		{{ formhelpers.render_field(form.description, rows=5) }}
+		{{ formhelpers.render_field(form.description, class="form-control textarea-autosize", rows=5) }}
 		{{ formhelpers.render_field(form.anonymous) }}
 		{{ formhelpers.render_buttons('Create') }}
 	</form>

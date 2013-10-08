@@ -15,7 +15,7 @@ assets.init_app(app)
 misaka = Misaka(app)
 
 login_manager = LoginManager(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'login.login'
 login_manager.login_message = u"You have to log in to access this."
 login_manager.login_message_category = 'error'
 

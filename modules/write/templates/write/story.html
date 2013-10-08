@@ -9,7 +9,6 @@
 		</h1>
 		
 		{{ form.csrf_token }}
-		{{ form.story }}
 		
 		<div class="toolbar clearfix">
 			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '*', { '***': '**', '**': '***', '*': '' })"><em>i</em></a>
@@ -17,12 +16,12 @@
 			
 			<a class="btn btn-default pull-right" href="{{ url_for('help.topic', topic='editing') }}" target="_blank">?</a>
 		</div>
-		{{ formhelpers.render_field(form.text, is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...   (The textarea will resize as you type)") }}
+		{{ formhelpers.render_field(form.text, class="form-control textarea-autosize", is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...   (The textarea will resize as you type)") }}
 		
 		<div class="distraction">
 			<a class="detail-disclosure" href="#advanced" data-toggle="collapse">&mdash;&nbsp;Advanced&nbsp;&mdash;</a>
 			<div id="advanced" class="collapse">
-				{{ formhelpers.render_field(form.prev_page, disabled=(story.pages.length == 0)) }}
+				{{ formhelpers.render_field(form.prev_page) }}
 				<p class="helptext">
 					You can make branching stories by setting multiple pages to follow a single one.<br />
 					Branching stories get a different URL scheme, using gibberish page identifiers rather than sequential page numbers.
@@ -37,9 +36,6 @@
 {% block after_js %}
 	<script type="text/javascript">
 		$('#text')
-			// Make it resize automatically as the content grows.
-			.autosize()
-			
 			// Make distractions disappear while you're typing, and
 			// reappear when they're not.
 			.keyup(hideDistractionsIfEventTargetIsNotEmpty)

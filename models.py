@@ -80,16 +80,36 @@ class Story(db.Model):
 
 class Page(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	identifier = db.Column(db.String(20), nullable=False, index=True)
 	author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	author = db.relationship('User', backref=db.backref('pages', lazy='dynamic'))
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
 	story = db.relationship('Story', backref='pages', lazy='joined')
-	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), nullable=False, index=True)
+	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), nullable=True, index=True)
 	prev_page = db.relationship('Page', backref=db.backref('following_pages', remote_side=[id]), lazy='dynamic')
 	text = db.Column(db.Text, nullable=False)
 	
+	__table_args__ = (
+		db.UniqueConstraint('story_id', 'identifier', name='_page_story_identifier'),
+	)
+	
 	def __init__(self, author, story, prev_page, text):
+		self.identifier = self.__class__.gen_identifier(story)
 		self.author = author
 		self.story = story
 		self.prev_page = prev_page
 		self.text = text
+	
+	@classmethod
+	def gen_identifier(cls, story):
+		length = 5
+		tries = 0
+		found_one = False
+		while not found_one:
+			candidate = random_string(length)
+			if cls.query.filter((cls.story == story) & (cls.identifier == candidate)).count() != 0:
+				tries += 1
+				if tries > 50:
+					length += 1
+			else:
+				return candidate

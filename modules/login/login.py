@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 from flask.ext.login import login_user, logout_user, login_required
 from forms import LoginForm, RegisterForm
-from models import User
+from models import db, User
 
 mod = Blueprint('login', __name__, template_folder='templates')
 
