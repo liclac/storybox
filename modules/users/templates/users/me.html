@@ -1,4 +1,4 @@
-{% extends "user.html" %}
+{% extends "users/user.html" %}
 {% block title %}{{ user.profile.name }}'s Profile{% endblock %}
 {% block header %}
 	<h1 class="pull-left">
@@ -6,7 +6,7 @@
 		<small>{{ user.username }}</small>
 	</h1>
 	<div class="toolbox">
-		<a class="btn btn-block btn-default" href="{{ url_for('me_edit') }}">Edit</a>
-		<a class="btn btn-block btn-default" href="{{ url_for('user', username=user.username) }}">Permalink</a>
+		<a class="btn btn-block btn-default" href="{{ url_for('users.me_edit') }}">Edit</a>
+		<a class="btn btn-block btn-default" href="{{ url_for('users.user', username=user.username) }}">Permalink</a>
 	</div>
 {% endblock %}

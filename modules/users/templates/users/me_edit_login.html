@@ -11,7 +11,7 @@
 			{{ formhelpers.render_field(form.username, autofocus=true) }}
 			{{ formhelpers.render_fields([form.password, form.password_confirm], rows=20) }}
 			{{ formhelpers.render_field(form.old_password) }}
-			{{ formhelpers.render_buttons("Save", [('Cancel', url_for('me_edit'))]) }}
+			{{ formhelpers.render_buttons("Save", [('Cancel', url_for('users.me_edit'))]) }}
 		</form>
 	</div>
 {% endblock %}

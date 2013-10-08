@@ -32,6 +32,9 @@ app.register_blueprint(login_mod)
 from modules.write.write import mod as write_mod
 app.register_blueprint(write_mod)
 
+from modules.users.users import mod as users_mod
+app.register_blueprint(users_mod)
+
 
 
 @login_manager.user_loader
@@ -74,43 +77,6 @@ def stories():
 @app.route('/s/<identifier>')
 def story(identifier):
 	return render_template('story.html')
-
-@app.route('/u/<username>/')
-def user(username):
-	user = User.by_username(username)
-	if user.username != username:	# This guarantees that mistaken capitalization and such is corrected
-		return redirect(url_for('user', username=user.username))
-	return render_template('user.html', user=user)
-
-@app.route('/me/')
-@login_required
-def me():
-	return render_template('me.html', user=current_user)
-
-@app.route('/me/edit/', methods=['GET', 'POST'])
-@login_required
-def me_edit():
-	form = UserEditForm(obj=current_user.profile)
-	if form.validate_on_submit():
-		current_user.profile.name = form.name.data
-		current_user.profile.bio = form.bio.data
-		db.session.commit()
-		return redirect(url_for('me'))
-	return render_template('me_edit.html', user=current_user, form=form)
-
-@app.route('/me/edit/login/', methods=['GET', 'POST'])
-@login_required
-def me_edit_login():
-	form = UserEditLoginForm(obj=current_user)
-	if form.validate_on_submit():
-		if not current_user.check_password(form.old_password.data):
-			form.old_password.errors.append('Incorrect Password')
-		else:
-			current_user.username = form.username.data
-			current_user.set_password(form.password.data)
-			db.session.commit()
-			return redirect('me')
-	return render_template('me_edit_login.html', user=current_user, form=form)
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
