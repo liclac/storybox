@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, EqualTo, Length
 
 class NewStoryForm(Form):
 	title = TextField(u'Title', validators=[DataRequired()])
-	description = TextAreaField(u'Description', validators=[DataRequired()])
+	description = TextAreaField(u'Description (optional)')
 	anonymous = BooleanField(u'Anonymous?', default=True)
 
 class WriteForm(Form):
@@ -20,7 +20,7 @@ class RegisterForm(Form):
 	name = TextField(u'Name', validators=[DataRequired(), Length(max=25)])
 	username = TextField(u'Username', validators=[DataRequired(), Length(max=16)])
 	password = PasswordField(u'Password', validators=[DataRequired(), EqualTo('password_confirm', message="Passwords don't match")])
-	password_confirm = PasswordField(u'', validators=[DataRequired()])
+	password_confirm = PasswordField(u'Password, again', validators=[DataRequired()])
 
 class UserEditForm(Form):
 	name = TextField(u'Name', validators=[DataRequired(), Length(max=25)])
@@ -28,6 +28,6 @@ class UserEditForm(Form):
 
 class UserEditLoginForm(Form):
 	username = TextField(u'Username', validators=[DataRequired(), Length(max=16)])
-	password = PasswordField(u'New Pass', validators=[DataRequired(), EqualTo('password_confirm', message="Passwords don't match")])
-	password_confirm = PasswordField(u'', validators=[DataRequired()])
-	old_password = PasswordField(u'Old Pass', validators=[DataRequired()])
+	password = PasswordField(u'New Password', validators=[DataRequired(), EqualTo('password_confirm', message="Passwords don't match")])
+	password_confirm = PasswordField(u'New Password, again', validators=[DataRequired()])
+	old_password = PasswordField(u'Old Password', validators=[DataRequired()])
