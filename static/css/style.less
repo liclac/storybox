@@ -166,11 +166,47 @@ small {
 	}
 	
 	// Bootstrap tries to be helpful. It's amazingly unsuccessful.
-	.navbar-collapse {
-		padding: 0;
+	@media (min-width: @screen-sm) {
+		.navbar-collapse {
+			padding: 0;
+			
+			.navbar-nav.navbar-left:first-child { margin-left: 0; }
+			.navbar-nav.navbar-right:last-child { margin-right: 0; }
+		}
+	}
+}
+
+@media (min-width: @screen-sm) {
+	.dropdown-toggle {
+		width: 160px;
+		text-align: right;
+	}
+	
+	ul.dropdown-menu {
+		box-shadow: none;
+		border: none;
+		border-radius: 0;
+		border-top: 1px solid #999;
+		border-left: 1px solid #eee;
 		
-		.navbar-nav.navbar-left:first-child { margin-left: 0; }
-		.navbar-nav.navbar-right:last-child { margin-right: 0; }
+		li {
+			&.divider {
+				background-color: transparent;
+				height: 10px;
+				margin: 0;
+			}
+			
+			a {
+				color: #777;
+				
+				&:hover {
+					background: none;
+					color: #333;
+					border-left: 1px solid #777;
+					margin-left: -1px;
+				}
+			}
+		}
 	}
 }
 
@@ -180,6 +216,8 @@ small {
 }
 	
 #footer {
+	.clearfix();
+	
 	margin-top:20px;
 	
 	ul {
@@ -247,6 +285,8 @@ small {
 }
 
 .toolbox {
+	.clearfix();
+	
 	margin-top: 10px;
 	width: 100%;
 	
