@@ -19,6 +19,11 @@ login_manager.login_view = 'login'
 login_manager.login_message = u"You have to log in to access this."
 login_manager.login_message_category = 'error'
 
+# Note that we're not using URL prefixes - some blueprints need to react to multiple
+# different URLs (such as the user one, which has both /u and /me)
+from modules.help.help import mod as help_mod
+app.register_blueprint(help_mod)
+
 @app.template_filter()
 def extract(d, key, default=None):
 	if not key in d:
@@ -118,14 +123,6 @@ def write_story(identifier):
 	form.prev_page.choices = [(page.id, page.title) for page in story.pages]
 	form.prev_page.default = len(form.prev_page.choices)
 	return render_template('write_story.html', story=story, form=form)
-
-@app.route('/h/')
-def help():
-	return render_template('help.html')
-
-@app.route('/h/<topic>')
-def help_branching(topic):
-	return render_template('help.html')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
