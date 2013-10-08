@@ -58,10 +58,12 @@
 		<!-- /Message Flashing -->
 		
 		<!-- Content -->
-		{% block content %}
-			<h2>Oops!</h2>
-			<p>Looks like someone forgot to override the <code>content</code> block!</p>
-		{% endblock %}
+		<div id="content">
+			{% block content %}
+				<h2>Oops!</h2>
+				<p>Looks like someone forgot to override the <code>content</code> block!</p>
+			{% endblock %}
+		</div>
 		<!-- /Content -->
 		
 		<!-- Footer -->

@@ -214,6 +214,11 @@ small {
 	max-width: 650px;
 	padding-bottom: 10px;
 }
+
+#content {
+	.clearfix();
+	margin-top: -20px;
+}
 	
 #footer {
 	.clearfix();
@@ -268,7 +273,7 @@ small {
 	transition: opacity 0.5s;
 	
 	&.distraction-hidden {
-		opacity: 0.4;
+		opacity: 0.3;
 		
 		&.distraction-disappear, .distraction-disappear {
 			opacity: 0;
@@ -326,7 +331,13 @@ small {
 
 .form-blend {
 	h1 {
-		color: #999;
+		margin-top: 0;
+		color: #333;
+		
+		small {
+			font-size: 18px;
+			color: #666;
+		}
 	}
 	input[type=text], input[type=password], select, textarea {
 		border: none;
