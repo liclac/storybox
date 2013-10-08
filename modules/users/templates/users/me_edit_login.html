@@ -6,7 +6,7 @@
 		<div class="panel-heading clearfix">
 			<h3 class="panel-title">Change Username or Password</h3>
 		</div>
-		<form class="form-horizontal form-blend panel-body" action="." method="POST">
+		<form class="form-horizontal panel-body" action="." method="POST">
 			{{ form.csrf_token }}
 			{{ formhelpers.render_field(form.username, autofocus=true) }}
 			{{ formhelpers.render_fields([form.password, form.password_confirm], rows=20) }}
