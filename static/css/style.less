@@ -59,15 +59,18 @@ small {
 	.panel-heading {
 		background: none;
 		padding-left: 0;
+		padding-top: 0;
 		
 		.panel-title {
-			font-size: 24pt;
+			font-size: 30px;
+			height: 33px;
+			line-height: 33px;
 		}
 		
 		&.with-right-link {
 			.clearfix();
 			
-			>* {
+			.panel-title {
 				@media(min-width: @screen-xs-min) {
 					float: left;
 				}
@@ -79,6 +82,8 @@ small {
 				
 				@media(min-width: @screen-xs-min) {
 					float: right;
+					height: 33px;
+					line-height: 33px;
 					padding: 0;
 				}
 			}
@@ -190,6 +195,12 @@ small {
 /*
  * -- Components
  */
+
+.title {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
 .helptext {
 	color: #777;
 	line-height: 1.5em;
@@ -205,6 +216,8 @@ small {
 	}
 }
 
+// These will be faded out by a JavaScript by having the .distraction-hidden
+// class applied to them.
 .distraction {
 	transition: opacity 0.5s;
 	
