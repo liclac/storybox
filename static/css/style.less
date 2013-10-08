@@ -119,9 +119,11 @@ small {
 		
 		>li >a {
 			color: #999;
+			background: none !important;
 			
 			&:hover {
 				color: #555;
+				background: none;
 				//background-color: #e7e7e7;
 	
 				@media (min-width: @screen-sm-min) {
@@ -135,6 +137,16 @@ small {
 					float:right;
 					margin-top:10px;
 				}
+			}
+		}
+		>li.open >a, >li >a:hover {
+			color: #555;
+			background: none;
+			//background-color: #e7e7e7;
+
+			@media (min-width: @screen-sm-min) {
+				border-bottom: 1px solid #999;
+				margin-bottom: -1px;
 			}
 		}
 		>li.active >a {
