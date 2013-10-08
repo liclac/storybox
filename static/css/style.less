@@ -97,11 +97,15 @@ small {
 	border:none;
 	border-radius:0;
 	
-	border-bottom:1px solid #ccc;
+	border-bottom:1px solid #eee;
 	
 	.navbar-header {
-		@media (max-width: @screen-sm-max) {
-			border-bottom:1px solid #ccc;
+		@media (max-width: @screen-xs-max) {
+			border-bottom:1px solid #eee;
+		}
+		a:hover {
+			border-bottom: 1px solid #999;
+			margin-bottom: -1px;
 		}
 	}
 	
@@ -114,9 +118,11 @@ small {
 		}
 		
 		>li >a {
+			color: #999;
+			
 			&:hover {
 				color: #555;
-				background-color: #e7e7e7;
+				//background-color: #e7e7e7;
 	
 				@media (min-width: @screen-sm-min) {
 					border-bottom: 1px solid #999;
