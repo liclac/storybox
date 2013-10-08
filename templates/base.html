@@ -37,11 +37,11 @@
 							<li><a href="#">My Favorites</a></li>
 							<li class="divider"></li>
 							<li><a href="#">Preferences</a></li>
-							<li><a href="{{ url_for('logout') }}">Log out</a></li>
+							<li><a href="{{ url_for('login.logout') }}">Log out</a></li>
 						</ul>
 					</li>
 					{%- else %}
-					<li><a href="{{ url_for('login') }}">Log in</a></li>
+					<li><a href="{{ url_for('login.login') }}">Log in</a></li>
 					{%- endif %}
 				</ul>
 			</div>

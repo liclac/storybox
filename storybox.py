@@ -19,10 +19,17 @@ login_manager.login_view = 'login'
 login_manager.login_message = u"You have to log in to access this."
 login_manager.login_message_category = 'error'
 
-# Note that we're not using URL prefixes - some blueprints need to react to multiple
-# different URLs (such as the user one, which has both /u and /me)
+
+
+# Note that we're not using URL prefixes - some blueprints need to react to
+# multiple different URLs (such as the user one, which has both /u and /me)
 from modules.help.help import mod as help_mod
 app.register_blueprint(help_mod)
+
+from modules.login.login import mod as login_mod
+app.register_blueprint(login_mod)
+
+
 
 @login_manager.user_loader
 def load_user(userid):
@@ -122,35 +129,6 @@ def write_story(identifier):
 	form.prev_page.choices = [(page.id, page.title) for page in story.pages]
 	form.prev_page.default = len(form.prev_page.choices)
 	return render_template('write_story.html', story=story, form=form)
-
-@app.route('/login/', methods=['GET', 'POST'])
-def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		user = User.query.filter(User.username==form.username.data).first()
-		if user and user.check_password(form.password.data):
-			login_user(user)
-			return redirect(url_for('index'))
-		else:
-			flash(u'Invalid username or password', 'error')
-	return render_template('login.html', form=form)
-
-@app.route('/logout/')
-@login_required
-def logout():
-	logout_user()
-	return redirect(url_for('index'))
-
-@app.route('/register/', methods=['GET', 'POST'])
-def register():
-	form = RegisterForm()
-	if form.validate_on_submit():
-		user = User(form.username.data, form.password.data, form.name.data)
-		db.session.add(user)
-		db.session.commit()
-		login_user(user)
-		return redirect(url_for('index'))
-	return render_template('register.html', form=form)
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
