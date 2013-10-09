@@ -86,7 +86,7 @@ class Page(db.Model):
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
 	story = db.relationship('Story', backref='pages', lazy='joined')
 	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), index=True)
-	prev_page = db.relationship('Page', backref=db.backref('following_pages', remote_side=[id]), lazy='dynamic')
+	prev_page = db.relationship('Page', remote_side=[id], backref=db.backref('following_pages', lazy='dynamic'))
 	title = db.Column(db.String(100), nullable=False)
 	text = db.Column(db.Text, nullable=False)
 	

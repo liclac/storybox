@@ -8,7 +8,7 @@ class NewStoryForm(Form):
 	anonymous = BooleanField(u'Anonymous?', default=True)
 
 class WriteForm(Form):
-	prev_page = SelectField(u'Previous Page')
+	prev_page = SelectField(u'Previous Page', coerce=int)
 	title = TextField(u'Title', validators=[DataRequired()])
 	text = TextAreaField(None, validators=[DataRequired()])
 

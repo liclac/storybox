@@ -5,10 +5,10 @@
 	<form class="form-blend" action="." method="POST">
 		{{ form.csrf_token }}
 		
-		<h1 class="distraction">
-			<small>{{ story.title }}&nbsp;&gt;</small>
-			<span class="block">New Chapter</span>
-		</h1>
+		<ol class="breadcrumb distraction">
+			<li><a href="{{ url_for('write.index') }}">Write</a></li>
+			<li class="active">{{ story.title }}</li>
+		</ol>
 		
 		{{ formhelpers.render_field(form.title, class="form-control title-field", autofocus=True) }}
 		

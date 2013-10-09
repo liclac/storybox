@@ -7,6 +7,7 @@ body {
 p {
 	margin-bottom: 15px;
 	font-size: 15px;
+	word-wrap: break-word;
 }
 
 h1, h2, h3 {
@@ -88,6 +89,30 @@ small {
 				}
 			}
 		}
+	}
+}
+
+.breadcrumb {
+	margin-top: -20px;
+	padding: 0;
+	padding-left: 15px;
+	border-radius: 0;
+	border-bottom: 1px solid #eee;
+	border-top: none;
+	border-right: none;
+	background: none;
+	
+	>li {
+		a, &.active {
+			display: inline-block;
+			padding: 5px 0;
+		}
+		
+		/*&+li{
+			&:before {
+				content: ">";
+			}
+		}*/
 	}
 }
 
@@ -175,40 +200,6 @@ small {
 		}
 	}
 }
-
-/*@media (min-width: @screen-sm) {
-	.dropdown-toggle {
-		width: 160px;
-		text-align: right;
-	}
-	
-	ul.dropdown-menu {
-		box-shadow: none;
-		border: none;
-		border-radius: 0;
-		border-top: 1px solid #999;
-		border-left: 1px solid #eee;
-		
-		li {
-			&.divider {
-				background-color: transparent;
-				height: 10px;
-				margin: 0;
-			}
-			
-			a {
-				color: #777;
-				
-				&:hover {
-					background: none;
-					color: #333;
-					border-left: 1px solid #777;
-					margin-left: -1px;
-				}
-			}
-		}
-	}
-}*/
 
 .container {
 	max-width: 650px;
@@ -346,7 +337,6 @@ small {
 		input[type=text], input[type=password], select, textarea {
 			height: 54px;
 			padding-top: 20px;
-			//padding-top: 20px;
 		}
 	}
 	
@@ -360,7 +350,7 @@ small {
 	}
 	>.toolbar {
 		height: 45px;
-		margin-bottom: -25px;
+		margin-bottom: -45px;
 		padding-top: 10px;
 	}
 	
@@ -380,6 +370,7 @@ small {
 		}
 	}
 	textarea {
+		padding-top: 5px;
 		border-bottom: none;
 		resize: none;
 		
@@ -388,8 +379,11 @@ small {
 		}
 	}
 	select {
-		height: 20px;
+		height: 25px;
+		
+		// Aaaaaah, why is this not working!?
 		outline: none !important;
+		border: none !important;
 	}
 }
 
