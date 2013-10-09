@@ -11,7 +11,8 @@ def index():
 @mod.route('/s/<identifier>/')
 def story(identifier):
 	story = Story.query.filter_by(identifier=identifier).first()
-	return render_template('stories/story.html', story=story)
+	first_page = story.pages[0]
+	return render_template('stories/story.html', story=story, first_page=first_page)
 
 @mod.route('/s/<identifier>/<pageID>')
 def page(identifier, pageID):

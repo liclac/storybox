@@ -1,7 +1,13 @@
 {% extends "base.html" %}
-{% block title %}{{ story.title }}{% endblock %}
+{% block title %}{{ page.title }} | {{ story.title }}{% endblock %}
 {% block content %}
-	<h1>{{ story.title }}</h1>
+	<h1>{{ page.title }}</h1>
 	{{ page.text|markdown }}
+	
+	<ul class="nav page-nav">
+		{% for next_page in page.following_pages -%}
+		<li><a href="{{ url_for('stories.page', identifier=story.identifier, pageID=next_page.identifier) }}">{{ next_page.title }}</a></li>
+		{% endfor -%}
+	</ul>
 {% endblock %}
 

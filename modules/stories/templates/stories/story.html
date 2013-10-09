@@ -3,5 +3,6 @@
 {% block content %}
 	<h1>{{ story.title }}</h1>
 	{{ story.description|markdown }}
+	<a class="btn btn-primary" href="{{ url_for('stories.page', identifier=story.identifier, pageID=first_page.identifier) }}">Read</a>
 {% endblock %}
 
