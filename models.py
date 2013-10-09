@@ -85,19 +85,21 @@ class Page(db.Model):
 	author = db.relationship('User', backref=db.backref('pages', lazy='dynamic'))
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
 	story = db.relationship('Story', backref='pages', lazy='joined')
-	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), nullable=True, index=True)
+	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), index=True)
 	prev_page = db.relationship('Page', backref=db.backref('following_pages', remote_side=[id]), lazy='dynamic')
+	title = db.Column(db.String(100), nullable=False)
 	text = db.Column(db.Text, nullable=False)
 	
 	__table_args__ = (
 		db.UniqueConstraint('story_id', 'identifier', name='_page_story_identifier'),
 	)
 	
-	def __init__(self, author, story, prev_page, text):
+	def __init__(self, author, story, prev_page, title, text):
 		self.identifier = self.__class__.gen_identifier(story)
 		self.author = author
 		self.story = story
 		self.prev_page = prev_page
+		self.title = title
 		self.text = text
 	
 	@classmethod

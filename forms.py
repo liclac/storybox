@@ -9,6 +9,7 @@ class NewStoryForm(Form):
 
 class WriteForm(Form):
 	prev_page = SelectField(u'Previous Page')
+	title = TextField(u'Title', validators=[DataRequired()])
 	text = TextAreaField(None, validators=[DataRequired()])
 
 class LoginForm(Form):

@@ -3,12 +3,14 @@
 {% block title %}Write{% endblock %}
 {% block content %}
 	<form class="form-blend" action="." method="POST">
+		{{ form.csrf_token }}
+		
 		<h1 class="distraction">
 			<small>{{ story.title }}&nbsp;&gt;</small>
-			<span class="block">New Page</span>
+			<span class="block">New Chapter</span>
 		</h1>
 		
-		{{ form.csrf_token }}
+		{{ formhelpers.render_field(form.title, class="form-control title-field", autofocus=True) }}
 		
 		<div class="toolbar clearfix">
 			<a class="btn btn-default" href="#" onclick="wrapSelection($('#text'), '*', { '***': '**', '**': '***', '*': '' })"><em>i</em></a>
@@ -16,7 +18,7 @@
 			
 			<a class="btn btn-default pull-right" href="{{ url_for('help.topic', topic='editing') }}" target="_blank">?</a>
 		</div>
-		{{ formhelpers.render_field(form.text, class="form-control textarea-autosize", is_horizontal=False, autofocus=True, resize=False, rows=10, placeholder="Once upon a time...   (The textarea will resize as you type)") }}
+		{{ formhelpers.render_field(form.text, class="form-control textarea-autosize with-toolbar", resize=False, rows=10, placeholder="Once upon a time...   (The textarea will resize as you type)") }}
 		
 		<div class="distraction">
 			<a class="detail-disclosure" href="#advanced" data-toggle="collapse">&mdash;&nbsp;Advanced&nbsp;&mdash;</a>
@@ -40,7 +42,6 @@
 			// reappear when they're not.
 			.keyup(hideDistractionsIfEventTargetIsNotEmpty)
 			.focus(hideDistractionsIfEventTargetIsNotEmpty)
-			.blur(function() { setDistractions(true) }).
-			focus()
+			.blur(function() { setDistractions(true) })
 	</script>
 {% endblock %}
