@@ -12,7 +12,7 @@ app.config.from_object("keys")
 db.init_app(app); db.app = app
 assets.init_app(app)
 
-misaka = Misaka(app)
+misaka = Misaka(app, **{i: True for i in app.config['MISAKA_EXTENSIONS']})
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login.login'
