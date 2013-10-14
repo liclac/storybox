@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask.ext.login import login_required, current_user
+from models import User
 from forms import UserEditForm, UserEditLoginForm
 
 mod = Blueprint('users', __name__, template_folder='templates')
