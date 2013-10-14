@@ -1,10 +1,11 @@
 import os
 
+# Database connection information
 SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(os.path.dirname(__file__), 'db.sqlite')
 
-SECURITY_EMAIL_SENDER = "noreply@uppf.in"
-SECURITY_REGISTERABLE = True
-SECURITY_RECOVERABLE = True
-SECURITY_CHANGEABLE = True
-
-MISAKA_EXTENSIONS = ['tables']
+# Enable Misaka extensions from this list
+MISAKA_EXTENSIONS = [
+	'tables',			# Enables the use of PHP-Markdown style tables
+	'strikethrough',	# Enables ~~strikethrough~~
+	'hard_wrap',		# Makes newlines in markdown insert newlines in the rendered text
+]

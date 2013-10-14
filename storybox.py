@@ -19,10 +19,17 @@ login_manager.login_view = 'login.login'
 login_manager.login_message = u"You have to log in to access this."
 login_manager.login_message_category = 'error'
 
+@login_manager.user_loader
+def load_user(userid):
+	return User.query.get(userid)
+
 
 
 # Note that we're not using URL prefixes - some blueprints need to react to
 # multiple different URLs (such as the user one, which has both /u and /me)
+from modules.core.core import mod as core_mod
+app.register_blueprint(core_mod)
+
 from modules.login.login import mod as login_mod
 app.register_blueprint(login_mod)
 
@@ -40,10 +47,8 @@ app.register_blueprint(help_mod)
 
 
 
-@login_manager.user_loader
-def load_user(userid):
-	return User.query.get(userid)
-
+# "Extracts" something from a dictionary, returning the value and the dictionary
+# with that value removed.
 @app.template_filter()
 def extract(d, key, default=None):
 	if not key in d:
@@ -53,25 +58,23 @@ def extract(d, key, default=None):
 		del d[key]
 		return (val, d)
 
+
 @app.context_processor
 def context_processor():
+	# Translates a message category into a Bootstrap alert- class suffix
+	# Falls back to the category if it's not found
 	def flashed_message_class(category):
 		map_ = {
 			'message': 'info',
 			'error': 'danger'
 		}
 		return map_[category] if category in map_ else category
+	
 	return {
 		'flashed_message_class': flashed_message_class
 	}
 
-@app.route('/')
-def index():
-	return render_template('index.html')
 
-@app.route('/about/')
-def about():
-	return render_template('about.html')
 
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
