@@ -29,7 +29,7 @@ def me_edit():
 		current_user.profile.name = form.name.data
 		current_user.profile.bio = form.bio.data
 		db.session.commit()
-		return redirect(url_for('me'))
+		return redirect(url_for('.me'))
 	return render_template('users/me_edit.html', user=current_user, form=form)
 
 @mod.route('/me/edit/login/', methods=['GET', 'POST'])
