@@ -12,7 +12,7 @@ def login():
 		user = User.query.filter(User.username==form.username.data).first()
 		if user and user.check_password(form.password.data):
 			login_user(user)
-			return redirect(url_for('index'))
+			return redirect(url_for('core.index'))
 		else:
 			flash(u'Invalid username or password', 'error')
 	return render_template('login/login.html', form=form)
@@ -21,7 +21,7 @@ def login():
 @login_required
 def logout():
 	logout_user()
-	return redirect(url_for('index'))
+	return redirect(url_for('core.index'))
 
 @mod.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -31,5 +31,5 @@ def register():
 		db.session.add(user)
 		db.session.commit()
 		login_user(user)
-		return redirect(url_for('index'))
+		return redirect(url_for('core.index'))
 	return render_template('login/register.html', form=form)
