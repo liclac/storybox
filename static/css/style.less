@@ -334,27 +334,6 @@ small {
 		}
 	}
 	
-	h1 + .form-group {
-		input[type=text], input[type=password], select, textarea {
-			height: 54px;
-			padding-top: 20px;
-		}
-	}
-	
-	>.form-group {
-		margin: 0;
-		
-		@media(max-width: @screen-xs-max) {
-			margin-left: -15px;
-			margin-right: -15px;
-		}
-	}
-	>.toolbar {
-		height: 45px;
-		margin-bottom: -45px;
-		padding-top: 10px;
-	}
-	
 	input[type=text], input[type=password], select, textarea {
 		border: none;
 		border-radius: 0;
@@ -385,6 +364,35 @@ small {
 		// Aaaaaah, why is this not working!?
 		outline: none !important;
 		border: none !important;
+	}
+	
+	h1 + .form-group {
+		input[type=text], input[type=password], select, textarea {
+			height: 54px;
+			padding-top: 20px;
+		}
+	}
+	
+	>.form-group {
+		margin: 0;
+		
+		@media(max-width: @screen-xs-max) {
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+		
+		&.has-error {
+			input {
+				color: #b94a48;
+				border-color: #b94a48;
+				font-style: italic;
+			}
+		}
+	}
+	>.toolbar {
+		height: 45px;
+		margin-bottom: -45px;
+		padding-top: 10px;
 	}
 }
 
