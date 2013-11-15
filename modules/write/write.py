@@ -25,6 +25,7 @@ def story(identifier):
 	# For some reason, we can't set a default value after the field has been initialized,
 	# so... let's put all the pages in BACKWARDS! :D
 	form.prev_page.choices = [(page.id, page.title) for page in story.pages[::-1]] or [(-1, '-- No Other Pages --')]
+	form.prev_page.disabled = (len(story.pages) == 0)
 	
 	if form.validate_on_submit():
 		prev_page = Page.query.filter_by(id=form.prev_page.data).first() if len(story.pages) > 0 else None

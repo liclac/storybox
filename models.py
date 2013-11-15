@@ -51,8 +51,8 @@ class Profile(db.Model):
 class Story(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	identifier = db.Column(db.String(20), unique=True, nullable=False, index=True)
-	author = db.relationship('User', backref=db.backref('owned_stories', lazy='dynamic'))
 	author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	author = db.relationship('User', backref=db.backref('owned_stories', lazy='dynamic'), foreign_keys=[author_id])
 	title = db.Column(db.String(100), nullable=False)
 	description = db.Column(db.String(255))
 	anonymous = db.Column(db.Boolean)
@@ -84,7 +84,7 @@ class Page(db.Model):
 	author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	author = db.relationship('User', backref=db.backref('pages', lazy='dynamic'))
 	story_id = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
-	story = db.relationship('Story', backref='pages', lazy='joined')
+	story = db.relationship('Story', backref='pages', lazy='joined', foreign_keys=[story_id])
 	prev_page_id = db.Column(db.Integer, db.ForeignKey('page.id'), index=True)
 	prev_page = db.relationship('Page', remote_side=[id], backref=db.backref('following_pages', lazy='dynamic'))
 	title = db.Column(db.String(100), nullable=False)
@@ -113,5 +113,6 @@ class Page(db.Model):
 				tries += 1
 				if tries > 50:
 					length += 1
+					tries = 0
 			else:
 				return candidate
